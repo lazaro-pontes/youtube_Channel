@@ -1,0 +1,24 @@
+{
+  "name": "youtube-channel",
+  "version": "1.0.0",
+  "description": "automatizando a criação de videos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lazaro-pontes/youtube_Channel.git"
+  },
+  "keywords": [
+    "AI",
+    "youtube",
+    "bot"
+  ],
+  "author": "Joao Lazaro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lazaro-pontes/youtube_Channel/issues"
+  },
+  "homepage": "https://github.com/lazaro-pontes/youtube_Channel#readme"
+}

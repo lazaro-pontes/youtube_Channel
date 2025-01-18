@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/lazaro-pontes/youtube_Channel/issues"
   },
-  "homepage": "https://github.com/lazaro-pontes/youtube_Channel#readme"
+  "homepage": "https://github.com/lazaro-pontes/youtube_Channel#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }

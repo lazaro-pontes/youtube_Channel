@@ -1,26 +1,57 @@
-const readLine = require('readline-sync')
+const fs = require('fs')
+const { google } = require('googleapis')
+const { OAuth2Client, checkToken } = require('./auth')
+require('dotenv').config()
 
 
-function start () {
-    const content = []
+const youtube = google.youtube({
+    version: 'v3',
+    auth: OAuth2Client,
+})
 
-    content.searchTerm = askAndReturnSearchTerm()
-    content.prefix = askAndReturnPrefix()
+//Função para fazer o upload do vídeo
+const uploadVideo = async (filePath, title, description, tags, categoryId) => {
+    //Checa se o token ja está salvo ou solicita autorização
+    await checkToken()
 
-    function askAndReturnSearchTerm () {
-        return readLine.question('Pesquise um termo na wikipedia: ')
-
+    const request = {
+        part: 'snippet,status',
+        resource: {
+            snippet: {
+                title: title,
+                description: description,
+                tags: tags,
+                categoryId: categoryId
+            },
+            status: {
+                privacyStatus: 'public'
+            },
+        },
+        media: {
+            body: fs.createReadStream(filePath)
+        },
     }
+    
+    try {
+        const response = await youtube.videos.insert(request)
+    
+        console.log(`Upload realizado com sucesso: ${response.data.videos}`)
 
-    function askAndReturnPrefix() {
-        const prefixes = ['Quem e?', 'O que e?', 'A historia de']
-        const selectedPrefixIndex =  readLine.keyInSelect(prefixes, 'Escolha uma opcao: ')
-        const selectedPrefixText = prefixes[selectedPrefixIndex]
+        //Retorna link do video
+        const videoId = response.data.id
+        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
+        return videoUrl
 
-        return selectedPrefixText
+    } catch (error) {
+        console.error('Erro ao realizar o upload: ', error)
     }
-
-    console.log(content)
 }
 
-start()
+//Exemplo
+const filePath = './output/part-3.mp4'
+const title = 'Bookie episodio 1'
+const description = 'serie do Charlie de dois homens e meio'
+const tags = ['shorts', 'DoisHomensE_Meio']
+const categoryId = 1 //Id de categoria Film & Animation
+
+uploadVideo(filePath, title, description, tags, categoryId)

@@ -1,3 +1,8 @@
+config/
+output/ 
+*.mp4
+*.mkv
+
 # Logs
 logs
 *.log

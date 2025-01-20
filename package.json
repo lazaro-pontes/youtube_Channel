@@ -22,6 +22,11 @@
   },
   "homepage": "https://github.com/lazaro-pontes/youtube_Channel#readme",
   "dependencies": {
+    "dotenv": "^16.4.7",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3",
+    "googleapis": "^144.0.0",
     "readline-sync": "^1.4.10"
   }
 }
